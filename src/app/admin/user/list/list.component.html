@@ -1,0 +1,33 @@
+<div class="row card mt-5">
+  <div class="card-header">
+    All Users
+  </div>
+  <div style="text-align: right" class="mt-2">
+    <a routerLink='/admin/user/add'><button class="btn btn-primary">Add</button></a>
+  </div>
+  <div class="p-3">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Status</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of users">
+          <td>{{item.name}}</td>
+          <td>{{item.email}}</td>
+          <td><div (click)="changeStatus(item.id)" [innerHTML]="item.status | statusDiv">
+          </div>
+          </td>
+          <td>
+            <button [routerLink]="'/admin/user/' + item.id + '/edit'" class="btn btn-primary mx-3" >Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

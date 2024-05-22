@@ -1,0 +1,45 @@
+<div class="row  mt-5 card">
+  <div class="card-header d-flex form-card-header">
+    <div>
+    Edit User
+    </div>
+    <div>
+     <a routerLink="/admin/user/all"> Go Back </a>
+      </div>
+  </div>
+  <form class="p-3" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" formControlName="name" class="form-control" placeholder="John Doe">
+      <small *ngIf="form.get('name')?.invalid && form.get('name')?.touched" class="text-danger">
+      <span *ngIf="form.get('name')?.errors?.['required']">Name is required.</span>
+      <span *ngIf="form.get('name')?.errors?.['maxlength']">Name cannot be more than 15 characters long.</span>
+      <span *ngIf="form.get('name')?.errors?.['minlength']">Name must be at least 5 characters long.</span>
+
+      </small>
+    </div>
+
+    <div class="form-group mt-3">
+      <label>Email address</label>
+      <input type="email" formControlName="email" class="form-control" placeholder="name@example.com">
+      <small *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="text-danger">
+        <span *ngIf="form.get('email')?.errors?.['required']">Email is required.</span>
+        <span *ngIf="form.get('email')?.errors?.['email'] && !form.get('email')?.errors?.['required']">Please enter a valid email address.</span>
+      </small>
+    </div>
+
+
+
+    <div>
+
+      <button type="submit" class="btn btn-primary mt-2 " style="margin: 0 auto; display: block;"  [disabled]="isLoading || form.invalid">
+        <ng-container *ngIf="!isLoading">Submit</ng-container>
+        <ng-container *ngIf="isLoading">
+          <div class="spinner"></div>
+        </ng-container>
+      </button>
+
+
+    </div>
+  </form>
+</div>
