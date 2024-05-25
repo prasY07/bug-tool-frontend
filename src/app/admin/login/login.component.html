@@ -1,1 +1,30 @@
-<p>login works!</p>
+<div class="container login-box">
+  <div class="text-center mt-3">
+    <h5><strong>Welcome Admin</strong></h5>
+  </div>
+  <div >
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Email address</label>
+        <input type="email" formControlName="email" class="form-control" />
+        <small *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-danger">
+          <span *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</span>
+          <span *ngIf="loginForm.get('email')?.errors?.['email'] && !loginForm.get('email')?.errors?.['required']">Please enter a valid email address.</span>
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" formControlName="password" class="form-control" />
+        <small *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
+          <span *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</span>
+          <span *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters long.</span>
+        </small>
+      </div>
+
+      <button type="submit" class="btn btn-primary mt-2 " style="margin: 0 auto; display: block;" [disabled]="loginForm.pristine || loginForm.invalid">Sign in</button>
+    </form>
+
+  </div>
+
+</div>

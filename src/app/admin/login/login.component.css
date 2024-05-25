@@ -1,0 +1,15 @@
+.login-box {
+  width: 40%;
+  border: 1px #9cbdbd solid;
+  margin-top: 10%;
+  border-radius: 14px;
+}
+
+form {
+  padding: 34px;
+}
+
+.loginBtn {
+  display: block;
+  margin: 0 auto;
+}
