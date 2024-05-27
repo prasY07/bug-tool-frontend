@@ -9,19 +9,25 @@
     <table class="table">
       <thead class="thead-dark">
         <tr>
-          <th scope="col">Id</th>
+          <th scope="col">Project ID</th>
           <th scope="col">Name</th>
+          <th scope="col">Deadline Date</th>
           <th scope="col">Status</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
-       <tr>
-        <td>#16666</td>
-        <td>Dummy</td>
-        <td>Active</td>
-        <td>Action</td>
-       </tr>
+        <tr *ngFor="let item of projects">
+          <td>#{{item.project_id}}</td>
+          <td>{{item.name}}</td>
+          <td> {{ item.d_date | customDateFormat }}</td>
+           <td><div (click)="changeStatus(item.id)" [innerHTML]="item.status | projectStatus">
+          </div>
+          </td>
+          <td>
+            <button [routerLink]="'/admin/user/' + item.id + '/edit'" class="btn btn-primary mx-3" >Edit</button>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>

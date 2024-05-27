@@ -5,10 +5,11 @@ import { UserService } from '../../user/service/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { IDropdownSettings, MultiSelectComponent, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { ProjectService } from '../service/project.service';
 
 interface User {
-  item_id: number;
-  item_text: string;
+  id: string;
+  name: string;
 }
 
 @Component({
@@ -25,52 +26,81 @@ export class AddComponent {
   dropdownList:any[] = [];
   selectedItems:any[] = [];
   dropdownSettings:any = {};
+  users: any[] = [];
 
-  user:any[]=[];
   constructor(
     private formBuilder: FormBuilder,
     private userService:UserService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private projectService:ProjectService
   ) { }
   ngOnInit() {
     this.form = this.formBuilder.group({
       name:  ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15)]],
       description:  ['', [Validators.required, Validators.minLength(5), Validators.maxLength(500)]],
       deadline_date:  ['', [Validators.required]],
-      selected_users:  ['', [Validators.required]],
+      selectedUsers:  ['', [Validators.required]],
 
 
     });
-
-    this.dropdownList = [
-      { item_id: 1, item_text: 'Mumbai' },
-      { item_id: 2, item_text: 'Bangaluru' },
-      { item_id: 3, item_text: 'Pune' },
-      { item_id: 4, item_text: 'Navsari' },
-      { item_id: 5, item_text: 'New Delhi' }
-    ];
+    this.getUsers()
+    this.dropdownList = this.users;
     // this.selectedItems = [
     //   { item_id: 3, item_text: 'Pune' },
     //   { item_id: 4, item_text: 'Navsari' }
     // ];
     this.dropdownSettings = {
       singleSelection: false,
-      idField: 'item_id',
-      textField: 'item_text',
+      idField: 'id',
+      textField: 'name',
 
-      itemsShowLimit: 3,
+      itemsShowLimit: 2,
       allowSearchFilter: true,
 
     };
   }
 
-
+  getUsers(){
+    this.userService.getDataWithoutPagination()
+    .subscribe(
+      (data: any) => {
+        this.users = data.data;
+      },
+      error => {
+        console.error('Error fetching users:', error);
+        alert("No user found");
+      }
+    );
+  }
   onSubmit(){
-    const formValue = this.form.value;
-    const selectedUsers = formValue.selected_users;
+    if(this.form.valid){
+      const formValue = this.form.value;
+      const selected_users = formValue.selectedUsers;
+      const selectedUserIds = selected_users.map((user:User) => user.id);
+      console.log("selectedUserIds",selectedUserIds);
+      this.form.patchValue({
+        selectedUsers: selectedUserIds
+      });
+      console.log("form",this.form.value);
 
-    const selectedUserIds = selectedUsers.map((user:User) => user.item_id);
+      this.projectService.createProject(this.form.value)
+      .subscribe(
+        response => {
+        this.toastr.success('New Project add successfully.', 'Success');
+        this.router.navigate(['/admin/project/all']);
+        this.isLoading = false;
+        },
+        error => {
+         this.toastr.error('OOPS Something Went Wrong', 'Error');
+          this.isLoading = false;
+
+        }
+      );
+    }else{
+      alert("Please fill form properly");
+    }
+
     // console.log(selectedUserIds);
   }
 }

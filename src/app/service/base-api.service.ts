@@ -17,6 +17,10 @@ export class BaseApiService {
     return this.http.get<any>(`${this.apiUrl}/${endpoint}`, { headers: this.applyHeaders() });
   }
 
+  getDataWithoutPagination(endpoint: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${endpoint}`, { headers: this.applyHeaders() });
+  }
+
   getInformation(endpoint: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${endpoint}`, { headers: this.applyHeaders() });
   }

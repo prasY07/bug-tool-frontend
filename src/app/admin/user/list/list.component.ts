@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { UserService } from '../service/user.service';
 import { CommonModule } from '@angular/common';
-import { StatusDivPipe } from '../../../common/status-div.pipe';
+import { StatusDivPipe } from '../../../commonPipe/status-div.pipe';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

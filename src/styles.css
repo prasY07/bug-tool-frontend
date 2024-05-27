@@ -44,3 +44,24 @@ button .spinner {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+
+.not_started{
+  background-color: gray; color: white; padding: 5px;
+}
+.in_progress{
+  background-color: blue; color: white; padding: 5px;
+}
+.completed{
+  background-color: green; color: white; padding: 5px;
+}
+.on_hold{
+  background-color: orange; color: white; padding: 5px;
+}
+.cancelled{
+  background-color: red; color: white; padding: 5px;
+}
+
+.default{
+  background-color: black; color: white; padding: 5px;
+}
