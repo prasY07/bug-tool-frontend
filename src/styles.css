@@ -48,20 +48,25 @@ button .spinner {
 
 .not_started{
   background-color: gray; color: white; padding: 5px;
+  border-radius: 11px;
 }
 .in_progress{
   background-color: blue; color: white; padding: 5px;
+  border-radius: 11px;
 }
 .completed{
   background-color: green; color: white; padding: 5px;
+  border-radius: 11px;
 }
 .on_hold{
   background-color: orange; color: white; padding: 5px;
+  border-radius: 11px;
 }
 .cancelled{
   background-color: red; color: white; padding: 5px;
+  border-radius: 11px;
 }
-
 .default{
   background-color: black; color: white; padding: 5px;
+  border-radius: 11px;
 }

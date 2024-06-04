@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AdminAuthService } from '../service/admin-auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { LocalStorageService } from '../../service/local-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginComponent {
     private formBuilder: FormBuilder,
     private adminAuthService: AdminAuthService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private localStorageService:LocalStorageService
   ) {
   }
 
@@ -42,7 +44,7 @@ export class LoginComponent {
           }
           if (data.success) {
             // this.adminService.updateAdminData(data.data); // Update admin data in the service
-            // this.localStorageService.setAuthToken(data.token);
+            this.localStorageService.setAdminAuthToken(data.token);
             this.toastr.success('Login successfully!', 'Welcome');
             this.router.navigate(['/admin/home']);
 

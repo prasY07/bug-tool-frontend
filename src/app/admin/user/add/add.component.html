@@ -33,7 +33,24 @@
       </small>
     </div>
 
+    <div class="form-group mt-3">
+      <label>Roles</label>
+
+      <ng-multiselect-dropdown
+      [placeholder]="'Select Role'"
+      [settings]="dropdownSettings"
+      [data]="dropdownList"
+      [(ngModel)]="selectedItems"
+      formControlName="selected_roles"
+      >
+      </ng-multiselect-dropdown>
+
+
+    </div>
+
     <div>
+
+
 
       <button type="submit" class="btn btn-primary mt-2 " style="margin: 0 auto; display: block;"  [disabled]="isLoading || form.pristine || form.invalid">
         <ng-container *ngIf="!isLoading">Submit</ng-container>

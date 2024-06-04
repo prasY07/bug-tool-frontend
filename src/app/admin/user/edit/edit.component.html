@@ -29,6 +29,20 @@
     </div>
 
 
+    <div class="form-group mt-3">
+      <label>Roles</label>
+
+      <ng-multiselect-dropdown
+      [placeholder]="'Select Role'"
+      [settings]="dropdownSettings"
+      [data]="dropdownList"
+      [(ngModel)]="selectedItems"
+      formControlName="selected_roles"
+      >
+      </ng-multiselect-dropdown>
+
+
+    </div>
 
     <div>
 

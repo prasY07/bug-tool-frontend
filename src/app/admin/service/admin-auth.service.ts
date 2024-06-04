@@ -19,10 +19,10 @@ export class AdminAuthService {
   logout(token:string|null){
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token,
+        Authorization: 'Bearer ' + token,
     });
 
-    return this.http.get<any>(`${this.apiUrl}/api/admin/logout`, { headers });
+    return this.http.get<any>(`${this.apiUrl}/admin/logout`, { headers });
 
   }
 }
