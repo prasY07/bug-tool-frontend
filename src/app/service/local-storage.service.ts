@@ -19,4 +19,10 @@ export class LocalStorageService {
     localStorage.setItem('adminToken',token);
     localStorage.setItem('isAdminLoggedIn', 'true');
   }
+
+
+  setUserAuthToken(token:string){
+    localStorage.setItem('userToken',token);
+    localStorage.setItem('isUserLoggedIn', 'true');
+  }
 }

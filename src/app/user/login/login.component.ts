@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ToastrService } from 'ngx-toastr';
 import { LocalStorageService } from '../../service/local-storage.service';
 import { Router } from '@angular/router';
+import { UserAuthService } from '../service/user-auth.service';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,8 @@ export class LoginComponent {
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
     private router: Router,
+    private userAuthService:UserAuthService,
+    private localStorageService:LocalStorageService
   ) {
   }
 
@@ -32,7 +35,30 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    console.log("here");
+    if (this.loginForm.valid) {
+      this.userAuthService.checkUserCredentials(this.loginForm.value.email, this.loginForm.value.password).subscribe(
+        (data) => {
+          if (data.length == 0) {
+            alert('No User found')
+            return;
+          }
+          if (data.success) {
+            this.localStorageService.setUserAuthToken(data.token);
+            this.toastr.success('Login successfully!', 'Welcome');
+            this.router.navigate(['/user/project/all']);
+
+          } else {
+            this.toastr.error(data.message,'Error');
+          }
+        },
+        (error) => {
+          // console.log(error.error.message);
+          this.toastr.error(error.error.message,'error');
+        }
+      );
+    } else {
+      alert('Please fill form');
+    }
   }
 
 
