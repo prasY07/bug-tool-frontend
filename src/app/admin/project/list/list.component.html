@@ -1,35 +1,29 @@
-<div class="row card mt-5">
-  <div class="card-header">
-    All Projects
-  </div>
-  <div style="text-align: right" class="mt-2">
-    <a routerLink='/admin/project/add'><button class="btn btn-primary">Add</button></a>
-  </div>
-  <div class="p-3">
-    <table class="table">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Project ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Deadline Date</th>
-          <th scope="col">Status</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of projects">
-          <td>#{{item.project_id}}</td>
-          <td>{{item.name}}</td>
-          <td> {{ item.d_date | customDateFormat }}</td>
-           <td><div (click)="changeStatus(item.id)" [innerHTML]="item.status | projectStatus">
-          </div>
-          </td>
-          <td>
-            <button [routerLink]="'/admin/project/' + item.id + '/edit'" class="btn btn-primary mx-3" >Edit</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<div style="text-align:right">
+ <a routerLink='/admin/project/add'> <button class="btn btn-primary mt-2">Add</button></a>
+</div>
 
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 mt-2" *ngFor="let item of projects">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ item.name }}</h5>
+          <hr />
+          <p class="card-text">
+            Deadline Date : {{ item.d_date | customDateFormat }}
+          </p>
+          <p class="card-text">Status : {{ item.status }}</p>
+          <div class="d-flex" style="justify-content:space-between">
+          <a href="#" class="btn btn-primary">Information</a>
+          <button
+          [routerLink]="'/admin/project/' + item.id + '/edit'"
+          class="btn btn-primary mx-3"
+        >
+          Edit
+        </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

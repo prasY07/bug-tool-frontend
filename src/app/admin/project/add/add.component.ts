@@ -45,7 +45,7 @@ export class AddComponent {
 
     });
     this.getUsers()
-    this.dropdownList = this.users;
+
 
     this.dropdownSettings = {
       singleSelection: false,
@@ -62,6 +62,7 @@ export class AddComponent {
     .subscribe(
       (data: any) => {
         this.users = data.data;
+        this.dropdownList = this.users;
       },
       error => {
         console.error('Error fetching users:', error);

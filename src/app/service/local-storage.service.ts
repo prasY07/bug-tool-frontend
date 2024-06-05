@@ -16,7 +16,7 @@ export class LocalStorageService {
   }
 
   setAdminAuthToken(token:string){
-    localStorage.setItem('token',token);
+    localStorage.setItem('adminToken',token);
     localStorage.setItem('isAdminLoggedIn', 'true');
   }
 }

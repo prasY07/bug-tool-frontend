@@ -34,14 +34,14 @@ export class BaseApiService {
   }
 
   updateStatus(endpoint: string): Observable<any> {
-    return this.http.patch<any>(`${this.apiUrl}/${endpoint}`, { headers: this.applyHeaders() });
+    return this.http.patch<any>(`${this.apiUrl}/${endpoint}`, {},{ headers: this.applyHeaders() });
   }
 
 
   private applyHeaders(): HttpHeaders {
     return new HttpHeaders({
       'Content-Type': 'application/json',
-      //  Authorization: 'Bearer ' + localStorage.getItem('token'),
+       Authorization: 'Bearer ' + localStorage.getItem('adminToken'),
     });
   }
 }
