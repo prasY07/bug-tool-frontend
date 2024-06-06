@@ -32,9 +32,7 @@ export class ListComponent {
     this.projectService.getProjects()
       .subscribe(
         (data: any) => {
-          // console.log("dd",data.data);
           this.projects = data.data;
-          // this.isLoading = true;
         },
         error => {
           console.error('Error fetching users:', error);
