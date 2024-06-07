@@ -15,13 +15,14 @@ export class UserBaseApiService {
     return this.http.get<any>(`${this.apiUrl}/${endpoint}`, { headers: this.applyHeaders() });
   }
 
+  getInformation(endpoint: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${endpoint}`, { headers: this.applyHeaders() });
+  }
+
   // getDataWithoutPagination(endpoint: string): Observable<any> {
   //   return this.http.get<any>(`${this.apiUrl}/${endpoint}`, { headers: this.applyHeaders() });
   // }
 
-  // getInformation(endpoint: string): Observable<any> {
-  //   return this.http.get<any>(`${this.apiUrl}/${endpoint}`, { headers: this.applyHeaders() });
-  // }
 
   // submitData(endpoint: string, data: object): Observable<any> {
   //   return this.http.post<any>(`${this.apiUrl}/${endpoint}`, data, { headers: this.applyHeaders() });
