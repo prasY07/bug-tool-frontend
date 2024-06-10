@@ -3,6 +3,9 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ProjectService } from '../service/project.service';
+import { BugService } from '../service/bug.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-bug',
@@ -25,7 +28,10 @@ export class AddBugComponent implements OnChanges  {
 
   constructor(
     private formBuilder: FormBuilder,
-    private projectService:ProjectService
+    private projectService:ProjectService,
+    private bugService:BugService,
+    private toastr: ToastrService,
+    private router: Router,
   ) { }
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -89,9 +95,33 @@ export class AddBugComponent implements OnChanges  {
 
   onSubmit(){
     if(this.form.valid){
-      console.log(this.form.value);
+      this.bugService.addBug(this.form.value,this.projectId)
+     .subscribe(
+       response => {
+       this.toastr.success('New Bug add successfully.', 'Success');
+      //  this.router.navigate(['/admin/user/all']);
+       this.isLoading = false;
+
+        this.closeModal();
+       },
+       error => {
+        let errorMsg = 'OOPS Something Went Wrong';
+          if (error.error && error.error.message) {
+            console.log("here",error.error.message);
+            errorMsg = error.error.message; // If error response has a message field
+          }
+
+        this.toastr.error(errorMsg, 'Error');
+         this.isLoading = false;
+
+       }
+     );
+    } else {
+      alert('Please fill form');
+       this.isLoading = false;
 
     }
+
   }
 
 

@@ -1,3 +1,13 @@
 .bug-add-btn{
   text-align: right;
 }
+
+
+.bug-heading{
+  background: lightgrey;
+  text-align: center;
+  border-radius: 7px;
+  font-weight: 300;
+  font-size: 21px;
+
+}

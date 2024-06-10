@@ -24,9 +24,9 @@ export class UserBaseApiService {
   // }
 
 
-  // submitData(endpoint: string, data: object): Observable<any> {
-  //   return this.http.post<any>(`${this.apiUrl}/${endpoint}`, data, { headers: this.applyHeaders() });
-  // }
+  submitData(endpoint: string, data: object): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/${endpoint}`, data, { headers: this.applyHeaders() });
+  }
 
   // updateData(endpoint: string, data: object): Observable<any> {
   //   return this.http.put<any>(`${this.apiUrl}/${endpoint}`, data, { headers: this.applyHeaders() });
