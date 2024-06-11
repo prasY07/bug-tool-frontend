@@ -16,6 +16,9 @@ export class ProjectService {
 
   getProjectsMembers(id:string):Observable<any>{
     return this.baseApi.getData(`user/${id}/project-assign-member`);
+  }
 
+  getProjectsDetails(id:string):Observable<any>{
+    return this.baseApi.getData(`user/${id}/project-details`);
   }
 }

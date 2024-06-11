@@ -1,4 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+
 
 @Pipe({
   name: 'projectStatus',
@@ -6,21 +8,25 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ProjectStatusPipe implements PipeTransform {
 
-  transform(status: string): string {
-    switch (status) {
-      case 'Not Started':
-        return '<div class="not_started">Not Started</div>';
-      case 'In Progress':
-        return '<div class="in_progress">In Progress</div>';
-      case 'Completed':
-        return '<div class="completed">Completed</div>';
-      case 'On Hold':
-        return '<div class="on_hold">On Hold</div>';
-      case 'Cancelled':
-        return '<div  class="cancelled">Cancelled</div>';
-      default:
-        return '<div class="default"></div>';
-    }
-  }
+  constructor(private sanitizer: DomSanitizer) {}
 
+  transform(value: string): SafeHtml {
+    let statusHtml: string;
+
+    switch (value) {
+      case 'Not Started':
+        statusHtml = '<span class="not_started">Not Started</span>';
+        break;
+      case 'In Progress':
+        statusHtml = '<span class="in_progress">In Progress</span>';
+        break;
+      case 'Completed':
+        statusHtml = '<span class="completed">Completed</span>';
+        break;
+      default:
+        statusHtml = '<span class="unknown_status">Unknown Status</span>';
+    }
+
+    return this.sanitizer.bypassSecurityTrustHtml(statusHtml);
+  }
 }

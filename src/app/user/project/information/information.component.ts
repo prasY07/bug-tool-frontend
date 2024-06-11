@@ -4,11 +4,13 @@ import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from '../service/project.service';
 import { BugService } from '../service/bug.service';
 import { CommonModule } from '@angular/common';
+import { CustomDateFormatPipe } from '../../../commonPipe/custom-date-format.pipe';
+import { ProjectStatusPipe } from '../../../commonPipe/project-status.pipe';
 
 @Component({
   selector: 'app-information',
   standalone: true,
-  imports: [AddBugComponent,CommonModule],
+  imports: [AddBugComponent,CommonModule,CustomDateFormatPipe,ProjectStatusPipe],
   templateUrl: './information.component.html',
   styleUrl: './information.component.css'
 })
@@ -39,8 +41,16 @@ export class InformationComponent {
 
     });
 
+    this.getProjectDetails();
+
   }
   getProjectDetails(){
+    this.projectService.getProjectsDetails(this.projectId).subscribe((data:any)=>{
+      this.projectDeatils = data.data;
+    },error=>{
+      console.error('Error fetching users:', error);
+
+    })
   }
 
   getBugs(){
@@ -52,4 +62,9 @@ export class InformationComponent {
 
     })
   }
+
+  showBugDetails(bug: any) {
+    alert(`Title: ${bug.title}\nDescription: ${bug.description}`);
+  }
 }
+

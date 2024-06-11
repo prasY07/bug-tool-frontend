@@ -4,40 +4,68 @@
   </section>
 
   <app-add-bug [isOpen]="isModalOpen" [projectId]="projectId" (close)="handleCloseModal()"></app-add-bug>
-
-  <div class="row mt-2 ">
-    <div class="col-6">
-      <div class="bug-heading">
-       <span> <b> Bugs </b></span>
+  <div class="mt-2">
+    <div class="col-12 card shadow-lg" style="height:max-content; padding: 0;">
+      <div class="card-header">
+        Project Information
       </div>
-      <div class="accordion" id="accordionExample">
-        <div class="accordion-item mt-2" *ngFor="let bug of bugs">
-          <h2 class="accordion-header" id="heading_{{bug.id}}">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse_' + bug.id" aria-expanded="false" [attr.aria-controls]="'collapse_' + bug.id">
-              {{ bug.title }}
-            </button>
-          </h2>
-          <div [id]="'collapse_' + bug.id" class="accordion-collapse collapse" [attr.aria-labelledby]="'heading_' + bug.id" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <strong>{{ bug.description }}</strong>
+      <div class="card-body row">
+        <div class="col-6">
+          <p><b>Name:</b> {{projectDeatils.name}}</p>
+        </div>
+        <div class="col-6">
+          <p><b>Status:</b> <span style="margin-left:5px;" [innerHTML]="projectDeatils.status | projectStatus"></span></p>
+        </div>
+        <div class="col-6">
+          <p><b>Deadline:</b> {{projectDeatils.d_date | customDateFormat}}</p>
+        </div>
+        <div class="col-6">
+          <div><strong>Assign Member:</strong>
+            <div class="members-container-inline">
+              <div *ngFor="let member of projectDeatils.members" class="member-avatar" title="{{ member.name }}">
+                {{ member.name.charAt(0).toUpperCase() }}
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-5 card mx-1" style="position:static; height:max-content; padding: 0 0px;">
-      <div class="card-header" style="">
-        Project Information
-      </div>
-      <div class="card-body">
-
-      <p><b>Name:</b> Test</p>
-      <p><b>Status:</b> Test</p>
-      <p><b>Deadline:</b> Test</p>
-
-      </div>
-
-    </div>
-
   </div>
+
+
+  <div class="mt-3">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="bug-heading">Bugs</h2>
+      </div>
+
+      <div class="col-6 mb-3" *ngFor="let bug of bugs">
+        <div class="card p-3 shadow-sm">
+          <div class="bug-section d-flex justify-content-between align-items-center">
+            <h5 class="card-title text-truncate" title="{{ bug.title }}">
+              {{ bug.title }}
+            </h5>
+            <button class="btn btn-link p-0" (click)="showBugDetails(bug)">
+              <i class="bi bi-info-circle"></i>
+            </button>
+          </div>
+          <p class="card-text"><strong>Assigned By:</strong> <span class="bug_assigned">{{ bug.assigned_by.name }}</span></p>
+
+          <div class="">
+            <p><strong>Assigned To:</strong></p>
+            <ul class="assigned-to-list">
+              <li *ngFor="let member of bug.assigned_to" class="member-avatar" title="{{ member.name }}">
+                {{ member.name.charAt(0).toUpperCase() }}
+              </li>
+            </ul>
+          </div>
+          <div class="card-footer text-muted">
+            <small>Bug Status: {{ bug.status }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 </div>
