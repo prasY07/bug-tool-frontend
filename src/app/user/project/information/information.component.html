@@ -60,13 +60,18 @@
             </ul>
           </div>
           <div class="card-footer text-muted">
-            <small>Bug Status: <span>
-              <select class="bug-status">
+
+          <b>Bug Status: </b>
+                <span *ngIf="isLoggedInUserAssigned(bug)">
+                <select class="bug-status" >
                 <option value="">Open</option>
                 <option value="">Inprogress</option>
                 <option value="">Completed</option>
               </select>
-            </span></small>
+            </span>
+            <span *ngIf="!isLoggedInUserAssigned(bug)">
+              {{bug.status}}
+            </span>
           </div>
         </div>
       </div>

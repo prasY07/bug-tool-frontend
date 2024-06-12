@@ -82,6 +82,10 @@ export class InformationComponent {
     }
     return null;
   }
+
+  isLoggedInUserAssigned(bug: any): boolean {
+    return bug.assigned_to.some((assignedMember: any) => assignedMember.id === this.loggedInUserData.id);
+  }
 }
 
 
