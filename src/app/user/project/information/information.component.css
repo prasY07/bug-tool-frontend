@@ -70,7 +70,7 @@
 }
 
 .assigned-to-list li {
-  background-color: #007bff;
+  background-color: #dd3f83;
   color: white;
   width: 40px;
   height: 40px;
@@ -101,4 +101,11 @@
 
 .bug_assigned{
 text-transform: capitalize;
+}
+
+.bug-status{
+  border: none;
+    margin-left: 20px;
+    height: 28px;
+    width: 110px;
 }

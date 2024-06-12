@@ -11,7 +11,7 @@
       </div>
       <div class="card-body row">
         <div class="col-6">
-          <p><b>Name:</b> {{projectDeatils.name}}</p>
+          <p><b>Project Name:</b> {{projectDeatils.name}}</p>
         </div>
         <div class="col-6">
           <p><b>Status:</b> <span style="margin-left:5px;" [innerHTML]="projectDeatils.status | projectStatus"></span></p>
@@ -38,7 +38,7 @@
       <div class="col-12">
         <h2 class="bug-heading">Bugs</h2>
       </div>
-
+      <div class="row" *ngIf="bugs.length > 0; else noBugs">
       <div class="col-6 mb-3" *ngFor="let bug of bugs">
         <div class="card p-3 shadow-sm">
           <div class="bug-section d-flex justify-content-between align-items-center">
@@ -60,10 +60,22 @@
             </ul>
           </div>
           <div class="card-footer text-muted">
-            <small>Bug Status: {{ bug.status }}</small>
+            <small>Bug Status: <span>
+              <select class="bug-status">
+                <option value="">Open</option>
+                <option value="">Inprogress</option>
+                <option value="">Completed</option>
+              </select>
+            </span></small>
           </div>
         </div>
       </div>
+    </div>
+      <ng-template #noBugs>
+        <div class="col-12 text-center">
+          <p>No bugs found.</p>
+        </div>
+      </ng-template>
     </div>
   </div>
 

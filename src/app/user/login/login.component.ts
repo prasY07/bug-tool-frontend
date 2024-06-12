@@ -42,8 +42,9 @@ export class LoginComponent {
             alert('No User found')
             return;
           }
+
           if (data.success) {
-            this.localStorageService.setUserAuthToken(data.token);
+            this.localStorageService.setUserAuthToken(data.token,data.data);
             this.toastr.success('Login successfully!', 'Welcome');
             this.router.navigate(['/user/project/all']);
 

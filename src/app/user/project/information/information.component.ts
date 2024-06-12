@@ -20,6 +20,8 @@ export class InformationComponent {
   isModalOpen: boolean = false;
   projectId: string='';
   bugs:any[]= [];
+  loggedInUserData: any = {};
+
   constructor(
     private aRoute: ActivatedRoute,
     private projectService:ProjectService,
@@ -35,7 +37,8 @@ export class InformationComponent {
   }
 
   ngOnInit() {
-    this.aRoute.params.subscribe(params => {
+     this.getUserData();
+     this.aRoute.params.subscribe(params => {
       this.projectId = params['id'];
     this.getBugs();
 
@@ -66,5 +69,19 @@ export class InformationComponent {
   showBugDetails(bug: any) {
     alert(`Title: ${bug.title}\nDescription: ${bug.description}`);
   }
+
+  getUserData() {
+    const userDataString = localStorage.getItem('userData');
+    if (userDataString) {
+      try {
+     return   this.loggedInUserData=  JSON.parse(userDataString);
+      } catch (error) {
+        console.error('Error parsing user data from localStorage', error);
+        return null;
+      }
+    }
+    return null;
+  }
 }
+
 

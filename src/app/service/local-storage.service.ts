@@ -21,8 +21,9 @@ export class LocalStorageService {
   }
 
 
-  setUserAuthToken(token:string){
+  setUserAuthToken(token:string,userData:object){
     localStorage.setItem('userToken',token);
     localStorage.setItem('isUserLoggedIn', 'true');
+    localStorage.setItem('userData', JSON.stringify(userData));
   }
 }
