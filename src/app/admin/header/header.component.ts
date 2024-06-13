@@ -21,7 +21,7 @@ export class HeaderComponent {
   logout(){
     const confirmLogout = confirm('Are you sure you want to logout?');
     if (confirmLogout) {
-      this.adminAuthService.logout(localStorage.getItem('token')).subscribe(
+      this.adminAuthService.logout(localStorage.getItem('adminToken')).subscribe(
         (data) => {
           localStorage.clear();
           this.toastr.success('logout successfully!', 'Bye');

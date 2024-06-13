@@ -1,0 +1,18 @@
+<div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': isOpen}" [ngStyle]="{'display': isOpen ? 'block' : 'none'}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ bug?.title }}</h5>
+        <!-- <button type="button" class="close btn btn-primary" (click)="closeModal()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+        <p>{{ bug?.description }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

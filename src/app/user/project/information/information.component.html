@@ -31,6 +31,7 @@
       </div>
     </div>
   </div>
+  <app-bug-detail [isOpen]="isBugDetailsModalOpen" [bug]="selectedBug" (close)="closeBugDetailsModal()"></app-bug-detail>
 
 
   <div class="mt-3">
@@ -45,7 +46,7 @@
             <h5 class="card-title text-truncate" title="{{ bug.title }}">
               {{ bug.title }}
             </h5>
-            <button class="btn btn-link p-0" (click)="showBugDetails(bug)">
+            <button class="btn btn-link p-0"  (click)="openBugDetails(bug)">
               <i class="bi bi-info-circle"></i>
             </button>
           </div>
@@ -84,5 +85,4 @@
     </div>
   </div>
 
-
-</div>
+  </div>

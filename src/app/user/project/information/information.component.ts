@@ -6,11 +6,12 @@ import { BugService } from '../service/bug.service';
 import { CommonModule } from '@angular/common';
 import { CustomDateFormatPipe } from '../../../commonPipe/custom-date-format.pipe';
 import { ProjectStatusPipe } from '../../../commonPipe/project-status.pipe';
+import { BugDetailComponent } from '../bug-detail/bug-detail.component';
 
 @Component({
   selector: 'app-information',
   standalone: true,
-  imports: [AddBugComponent,CommonModule,CustomDateFormatPipe,ProjectStatusPipe],
+  imports: [AddBugComponent,CommonModule,CustomDateFormatPipe,ProjectStatusPipe,BugDetailComponent],
   templateUrl: './information.component.html',
   styleUrl: './information.component.css'
 })
@@ -21,6 +22,9 @@ export class InformationComponent {
   projectId: string='';
   bugs:any[]= [];
   loggedInUserData: any = {};
+
+  isBugDetailsModalOpen: boolean = false;
+  selectedBug: any = null;
 
   constructor(
     private aRoute: ActivatedRoute,
@@ -85,6 +89,17 @@ export class InformationComponent {
 
   isLoggedInUserAssigned(bug: any): boolean {
     return bug.assigned_to.some((assignedMember: any) => assignedMember.id === this.loggedInUserData.id);
+  }
+
+  openBugDetails(bug: any) {
+    console.log("dsafadsa");
+    this.selectedBug = bug;
+    this.isBugDetailsModalOpen = true;
+  }
+
+
+  closeBugDetailsModal() {
+    this.isBugDetailsModalOpen = false;
   }
 }
 
